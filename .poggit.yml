@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/MinekCZ/EasyLobby
+build-by-default: true
+branches:
+- master
+projects:
+  EasyLobby:
+    path: ""
+...
