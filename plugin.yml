@@ -1,0 +1,5 @@
+name: EasyLobby
+author: MinekCz
+api: 3.0.0
+version: 1.0.0
+main: MinekCz\el\Main
