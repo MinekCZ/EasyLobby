@@ -1,0 +1,12 @@
+prefix: "§7Easy§aLobby"
+command-description: "§aTeleport to the lobby"
+perm: "el.command.admin"
+noperm: ":prefix: > §cYou don't have permission to execute this command"
+lobby-done: ":prefix: > §aThe lobby was set up successfully"
+lobby-tp: ":prefix: > You have been successfully teleported to the lobby"
+
+lobby:
+- 0
+- 0
+- 0
+- "world"
