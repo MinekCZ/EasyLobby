@@ -7,9 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
-use pocketmine\utils\TextFormat as TF;
 use MinekCz\el\Main;
-
 
 class EasyLobby extends Command implements PluginIdentifiableCommand {
     
@@ -19,7 +17,7 @@ class EasyLobby extends Command implements PluginIdentifiableCommand {
     public function __construct(Main $plugin) {
         $this->plugin = $plugin;
         $this->config = $this->plugin->ConfigManager;
-        parent::__construct("easylobby", "§7Easy§aLobby §7main command", \null, ["spawn", "lobby"]);
+        parent::__construct("easylobby", "§7Easy§aLobby §7main command", null, ["spawn", "lobby"]);
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -45,31 +43,18 @@ class EasyLobby extends Command implements PluginIdentifiableCommand {
                     "§7/easylobby help\n".
                     "§7/easylobby setlobby/setspawn/sethub");
                 break;
-            case "setlobby":
-                if(!$sender->hasPermission($this->config->get("perm"))) {
-                    $sender->sendMessage($this->config->get("noperm"));
-                    break;
-                }
-                $level = $this->plugin->playerLevel($sender);
-                $lobby = array($sender->getX(), $sender->getY(), $sender->getZ(), $level);
-                $this->config->setArray("lobby", $lobby);
-                $sender->sendMessage($this->config->get("lobby-done"));
-                break;
             case "setspawn":
-                if(!$sender->hasPermission($this->config->get("perm"))) {
-                    $sender->sendMessage($this->config->get("noperm"));
-                    break;
-                }
-                $level = $this->plugin->playerLevel($sender);
-                $lobby = array($sender->getX(), $sender->getY(), $sender->getZ(), $level);
-                $this->config->setArray("lobby", $lobby);
-                $sender->sendMessage($this->config->get("lobby-done"));
-                break;
             case "sethub":
+            case "setlobby":
+                if(!$sender instanceof Player) {
+                    $sender->sendMessage("You can only run this command in game!");
+                    break;
+                }
                 if(!$sender->hasPermission($this->config->get("perm"))) {
                     $sender->sendMessage($this->config->get("noperm"));
                     break;
                 }
+                /** @var Player $sender */
                 $level = $this->plugin->playerLevel($sender);
                 $lobby = array($sender->getX(), $sender->getY(), $sender->getZ(), $level);
                 $this->config->setArray("lobby", $lobby);

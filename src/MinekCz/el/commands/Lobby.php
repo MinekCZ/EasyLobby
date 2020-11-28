@@ -7,9 +7,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
-use pocketmine\utils\TextFormat as TF;
 use MinekCz\el\Main;
-
 
 class Lobby extends Command implements PluginIdentifiableCommand {
     
@@ -25,6 +23,7 @@ class Lobby extends Command implements PluginIdentifiableCommand {
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
 
         if(!isset($args[0])) {
+            /** @var Player $sender */
             $this->plugin->teleport($sender);
             $sender->sendMessage($this->config->get("lobby-tp"));
             return;
@@ -40,6 +39,7 @@ class Lobby extends Command implements PluginIdentifiableCommand {
                     $this->plugin->teleport($player);
                     $player->sendMessage($this->config->get("lobby-tp"));
                 } else {
+                    /** @var Player $sender */
                     $this->plugin->teleport($sender);
                     $sender->sendMessage($this->config->get("lobby-tp"));
                 }
