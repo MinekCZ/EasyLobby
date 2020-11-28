@@ -4,55 +4,32 @@ declare(strict_types = 1);
 
 namespace MinekCz\el;
 
-
 use pocketmine\event\Listener;
-
-use pocketmine\level\Level;
-use pocketmine\level\Position;
-
 use pocketmine\Player;
-use pocketmine\Server;
-
 use pocketmine\plugin\PluginBase as Plugin;
 use pocketmine\math\Vector3;
-
-use pocketmine\command\Command;
-use pocketmine\command\CommandSender;
-use pocketmine\command\ConsoleCommandSender;
-
-use pocketmine\utils\Config;
-
 use MinekCz\el\commands\Lobby;
 use MinekCz\el\commands\EasyLobby;
 
 class Main extends Plugin implements Listener {
 
     //Managers
-    public $SetupManager;
     public $ConfigManager;
   
     public $config;
   
     public function onEnable(): void {
+        // Managers
+        $this->ConfigManager = new ConfigManager($this);
+        $this->getServer()->getCommandMap()->registerAll("EasyLobby", [new EasyLobby($this), new Lobby($this)]);
   
-      // Managers
+        $this->getConfig()->save();
   
-      //$this->SetupManager = new managers\SetupManager($this);
-      $this->ConfigManager = new ConfigManager($this);
-      //$this->PortalManager = new managers\PortalManager($this);
-  
-      //$this->getServer()->getPluginManager()->registerEvents(new Events($this), $this);
-      $this->getServer()->getCommandMap()->register("easylobby", new EasyLobby($this));
-      $this->getServer()->getCommandMap()->register("lobby", new Lobby($this));
-  
-      $this->getConfig()->save();
-  
-      $this->config = $this->ConfigManager;
+        $this->config = $this->ConfigManager;
     }
 
     public function playerLevel(Player $player) :string {
-        $level = $player->getLevel()->getFolderName();
-        return $level;
+        return $player->getLevel()->getFolderName();
     }
 
     public function teleport(Player $player) {

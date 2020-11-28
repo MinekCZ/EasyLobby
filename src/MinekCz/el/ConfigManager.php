@@ -2,14 +2,7 @@
 
 namespace MinekCz\el;
 
-
-use pocketmine\Player;
 use pocketmine\event\Listener;
-use pocketmine\level\Position;
-use pocketmine\utils\TextFormat;
-use pocketmine\math\Vector3;
-
-use MinekCz\el\Main;
 
 class ConfigManager implements Listener {
 
